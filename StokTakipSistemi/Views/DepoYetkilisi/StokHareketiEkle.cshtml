@@ -1,0 +1,61 @@
+﻿@model StokTakipSistemi.Models.STOK_HAREKET
+@{
+    ViewBag.Title = "Stok Hareketi Ekle";
+}
+
+<h2>StokHareketiEkle</h2>
+
+
+@using (Html.BeginForm("StokHareketiKaydet", "DepoYetkilisi", FormMethod.Post))
+{
+
+    <div class="form-group">
+        @Html.Label("Stok Seçiniz")
+        @Html.DropDownList("STOK_ID", (SelectList)ViewBag.stoklar, "-- Stok Seçiniz --", new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Depo Seçiniz")
+        @Html.DropDownList("DEPO_ESLESTIRME_ID", (SelectList)ViewBag.eslesmeler, "-- Depo Eşleşmesi Seçiniz --", new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Sorumlu Seçiniz")
+        @Html.DropDownList("SORUMLU_ID", (SelectList)ViewBag.sorumlular, "-- Sorumlu Seçiniz --", new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        <label style="font-size:16px;"><b>Hareket Tipi</b></label>
+
+        @Html.TextBoxFor(m => m.HAREKET_TIP, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.HAREKET_TIP, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <label style="font-size:16px;"><b>Açıklama</b></label>
+
+        @Html.TextBoxFor(m => m.ACIKLAMA, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.ACIKLAMA, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label style="font-size:16px;"><b>Hareket Miktarı</b></label>
+
+        @Html.TextBoxFor(m => m.HAREKET_MIKTAR, new { @class = "form-control", pattern = @"\d+(\.\d+)?|\d+(,\d+)?", title = "Decimal number with dot or comma" })
+        @Html.ValidationMessageFor(model => model.HAREKET_MIKTAR, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <label style="font-size:16px;"><b>Hareket Tarihi</b></label>
+
+        @Html.TextBoxFor(m => m.HAREKET_TARIHI, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.HAREKET_TARIHI, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Stok Hareketini Ekle</button>
+    </div>
+    if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    }
+}
+
+

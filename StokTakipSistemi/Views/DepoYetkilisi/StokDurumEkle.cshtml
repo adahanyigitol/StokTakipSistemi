@@ -1,0 +1,33 @@
+﻿@model StokTakipSistemi.Models.STOK_DURUM
+@{
+    ViewBag.Title = "Stok Durum Ekle";
+}
+
+
+@using (Html.BeginForm("StokDurumEkleF", "DepoYetkilisi", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+    <h2>StokDurumEkle</h2>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.STOK_ID, "Stok")
+        @Html.DropDownList("STOK_ID", ViewBag.Stoklar as SelectList, "-- Stok Seçiniz --", new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DEPO_ESLESTIRME_ID, "Depo Eşleştirme")
+        @Html.DropDownList("DEPO_ESLESTIRME_ID", ViewBag.Eslesmeler as SelectList, "-- Depo Eşleştirme Seçiniz --", new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DURUM_MIKTAR, "Durum Miktarı") <br />
+        @Html.TextBoxFor(model => model.DURUM_MIKTAR, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+ 
+
+        if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+        {
+            <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+        }
+        <button type="submit" class="btn btn-primary">Stok Durum Ekle</button>
+    }

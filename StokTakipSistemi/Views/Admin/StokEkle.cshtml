@@ -1,0 +1,60 @@
+﻿@model StokTakipSistemi.Models.STOK
+@{
+    ViewBag.Title = "Stok Ekle";
+}
+
+<h2>Stok Ekle</h2>
+
+@using (Html.BeginForm("StokEkle", "Admin", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.STOK_AD)
+        @Html.TextBoxFor(model => model.STOK_AD, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.STOK_AD)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.STOK_OLCUBIRIM)
+        @Html.TextBoxFor(model => model.STOK_OLCUBIRIM, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.STOK_OLCUBIRIM)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.STOK_MARKA)
+        @Html.TextBoxFor(model => model.STOK_MARKA, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.STOK_MARKA)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.STOK_DETAY)
+        @Html.TextBoxFor(model => model.STOK_DETAY, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.STOK_DETAY)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.KAYIT_TARIHI)
+        @Html.TextBoxFor(model => model.KAYIT_TARIHI, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.KAYIT_TARIHI)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.STATU)
+        @Html.TextBoxFor(model => model.STATU, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.STATU)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MIN_MIKTAR)
+        @Html.TextBoxFor(model => model.MIN_MIKTAR, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.MIN_MIKTAR)
+    </div>
+
+    if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+    {
+        <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+    }
+
+    <button type="submit" class="btn btn-primary">Stok Ekle</button>
+}

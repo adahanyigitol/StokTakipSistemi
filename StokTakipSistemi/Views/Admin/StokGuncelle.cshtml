@@ -1,0 +1,115 @@
+﻿@model StokTakipSistemi.Models.STOK
+@{
+    ViewBag.Title = "Stok Güncelle";
+}
+
+<body>
+    <br />
+    <br />
+    <br />
+    @using (Html.BeginForm("StokGuncelle", "Admin", FormMethod.Post))
+    {
+        @Html.HiddenFor(x => x.STOK_ID)
+
+        <div style="margin-bottom:295px">
+            <h2 style="margin-left:155px; font-size:30px;"><b>Depo</b></h2>
+            <br />
+            <table class="tbl">
+                <tr>
+                    <th>
+                        <label style="font-size:14px">Stok Adı: </label>
+                    </th>
+                    <td>
+                        @Html.TextBoxFor(x => x.STOK_AD, new { @class = "form-control", @placeholder = "Stok Adı..." })
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label style="font-size: 14px">Statu: </label>
+                    </th>
+                    <td>
+                        @Html.TextBoxFor(x => x.STATU, new { @class = "form-control", @placeholder = "Statu..." })
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label style="font-size: 14px">Olcu Birimi: </label>
+                    </th>
+                    <td>
+                        @Html.TextBoxFor(x => x.STOK_OLCUBIRIM, new { @class = "form-control", @placeholder = "Stok Olcubirimi..." })
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label style="font-size: 14px">Stok Marka: </label>
+                    </th>
+                    <td>
+                        @Html.TextBoxFor(x => x.STOK_MARKA, new { @class = "form-control",  @placeholder = "Marka..." })
+                    </td>
+                </tr> <tr>
+                    <th>
+                        <label style="font-size: 14px">Stok Detay: </label>
+                    </th>
+                    <td>
+                        @Html.TextBoxFor(x => x.STOK_DETAY, new { @class = "form-control", @placeholder = "Stok Detay..." })
+                    </td>
+                </tr> <tr>
+                    <th>
+                        <label style="font-size: 14px">Kayıt Tarihi: </label>
+                    </th>
+                    <td>
+                        @Html.TextBoxFor(x => x.KAYIT_TARIHI, new { @class = "form-control",  @placeholder = "Kayıt Tarihi..." })
+                    </td>
+                </tr><tr>
+                    <th>
+                        <label style="font-size: 14px">Min Miktar: </label>
+                    </th>
+                    <td>
+                        @Html.TextBoxFor(x => x.MIN_MIKTAR, new { @class = "form-control",  @placeholder = "Min Miktar..." })
+                    </td>
+                </tr><tr>
+                    <th>
+                        <label style="font-size: 14px">Olusturan Kullanıcı: </label>
+                    </th>
+                    <td>
+                        @Html.TextBoxFor(x => x.OLUSTURAN_KULLANICI, new { @class = "form-control", @readonly = true, @placeholder = "Olusturan Kullanıcı..." })
+                    </td>
+                </tr><tr>
+                    <th>
+                        <label style="font-size: 14px">Olusturma Tarihi: </label>
+                    </th>
+                    <td>
+                        @Html.TextBoxFor(x => x.OLUSTURMA_TARIHI, new { @class = "form-control", @readonly = true, @placeholder = "Olusturma Tarihi..." })
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label style="font-size: 14px">Guncelleyen Kullanici: </label>
+                    </th>
+                    <td>
+                        @Html.TextBoxFor(x => x.GUNCELLEYEN_KULLANICI, new { @class = "form-control", @readonly = true, @placeholder = "Guncelleyen Kullanici..." })
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label style="font-size:14px">Guncelleme Tarihi: </label>
+                    </th>
+                    <td>
+                        @Html.TextBoxFor(x => x.GUNCELLEME_TARIHI, new { @class = "form-control", @readonly = true, @placeholder = "Guncelleme Tarihi..." })
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <br />
+                        <input type="submit" value="Update" class="btn btn-danger" />
+                    </td>
+                    <td>
+                        <br />
+                        <button class="btn btn-warning" onclick="location.href='@Url.Action("StokSayfasi", "Admin")'; return false;">Cancel</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    }
+</body>

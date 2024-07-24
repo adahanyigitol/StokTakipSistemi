@@ -1,0 +1,113 @@
+﻿@model StokTakipSistemi.Models.KULLANICI
+@{
+    ViewBag.Title = "Kullanıcı Güncelle";
+}
+
+<body>
+    <br />
+    <br />
+    <br />
+    @using (Html.BeginForm("RaporKullaniciGuncelle", "RaporKullanicisi", FormMethod.Post))
+    {
+        @Html.HiddenFor(x => x.KUL_ID)
+
+        <div style="margin-bottom:295px">
+            <h2 style="margin-left:155px; font-size:30px;"><b>Kullanıcı Profili</b></h2>
+            <br />
+            <table class="tbl">
+                <tr>
+                    <th>
+                        <label style="font-size:14px">Username: </label>
+                    </th>
+                    <td>
+                        @Html.TextBoxFor(x => x.KUL_USERNAME, new { @class = "form-control", @placeholder = "Username..." })
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label style="font-size:14px">First Name: </label>
+                    </th>
+                    <td>
+                        @Html.TextBoxFor(x => x.KUL_AD, new { @class = "form-control", @placeholder = "Ad..." })
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label style="font-size:14px">Last name: </label>
+                    </th>
+                    <td>
+                        @Html.TextBoxFor(x => x.KUL_SOYAD, new { @class = "form-control", @placeholder = "Soyad..." })
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        <label style="font-size: 14px">Kullanıcı Tip: </label>
+                    </th>
+                    <td>
+                        @Html.TextBoxFor(x => x.KUL_TIP, new { @class = "form-control", @readonly = true, @placeholder = "Tip..." })
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label style="font-size: 14px">Password: </label>
+                    </th>
+                    <td>
+                        @Html.TextBoxFor(x => x.KUL_SIFRE, new { @class = "form-control", @placeholder = "Password..." })
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label style="font-size: 14px">Statü: </label>
+                    </th>
+                    <td>
+                        @Html.TextBoxFor(x => x.STATU, new { @class = "form-control", @placeholder = "Statü..." })
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label style="font-size: 14px">Creator: </label>
+                    </th>
+                    <td>
+                        @Html.TextBoxFor(x => x.OLUSTURAN_KULLANICI, new { @class = "form-control", @readonly = true, @placeholder = "Creator..." })
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label style="font-size: 14px">Creation Date: </label>
+                    </th>
+                    <td>
+                        @Html.TextBoxFor(x => x.OLUSTURMA_TARIHI, new { @class = "form-control", @readonly = true, @placeholder = "Creation Date..." })
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label style="font-size: 14px">Updater: </label>
+                    </th>
+                    <td>
+                        @Html.TextBoxFor(x => x.GUNCELLEYEN_KULLANICI, new { @class = "form-control", @readonly = true, @placeholder = "Updater..." })
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label style="font-size:14px">Update Date: </label>
+                    </th>
+                    <td>
+                        @Html.TextBoxFor(x => x.GUNCELLEME_TARIHI, new { @class = "form-control", @readonly = true, @placeholder = "Update Date..." })
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <br />
+                        <input type="submit" value="Update" class="btn btn-danger" />
+                    </td>
+                    <td>
+                        <br />
+                        <button class="btn btn-warning" onclick="location.href='@Url.Action("RaporKulSayfasi", "RaporKullanicisi")'; return false;">Cancel</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    }
+</body>
