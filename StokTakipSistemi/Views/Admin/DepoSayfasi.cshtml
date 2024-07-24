@@ -1,0 +1,153 @@
+﻿@using StokTakipSistemi.Models
+@model IEnumerable<DEPO>
+@{
+    ViewBag.Title = "Depo Listesi";
+}
+
+<h2>Depo Listesi</h2>
+
+<div id="notification" class="alert alert-success" style="display: none;">
+    @if (TempData["SuccessMessage"] != null)
+    {
+        @TempData["SuccessMessage"]
+    }
+    else
+    {
+        @TempData["FailMessage"]
+    }
+</div>
+
+@using (Html.BeginForm("DepoSayfasi", "Admin", FormMethod.Get))
+{
+    <div class="button-container">
+        @Html.TextBox("searchString", null, new { @class = "form-control search-input", placeholder = "Tabloda arayın" })
+    </div>
+}
+
+<style>
+
+    .search-input {
+        width: 250px; /* Adjust the width of the input field as needed */
+        margin-right: 5px; /* Optional: Add some space between input field and button */
+    }
+</style>
+
+<br />
+
+@using (Html.BeginForm("DepoEkle", "Admin", FormMethod.Post))
+{
+    <div class="button-container" style="float: left;">
+        <button type="submit" class="btn btn-success">Depo Ekle</button>
+    </div>
+}
+
+@using (Html.BeginForm("ExportToExcelDepo", "Admin", FormMethod.Post))
+{
+    <div class="button-container" style="float: right;">
+        <button type="submit" class="btn btn-success">Excel'e Aktar</button>
+    </div>
+}
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Adı</th>
+            <th>Statu</th>
+            <th>Oluşturan Kullanıcı</th>
+            <th>Oluşturma Tarihi</th>
+            <th>Güncelleyen Kullanıcı</th>
+            <th>Güncelleme Tarihi</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var depo in (IEnumerable<DEPO>)TempData["Depolar"])
+        {
+            if (depo != null)
+            {
+                <tr>
+                    <td>@depo.DEPO_ADI</td>
+                    <td>@depo.STATU</td>
+                    <td>@depo.OLUSTURAN_KULLANICI</td>
+                    <td>@depo.OLUSTURMA_TARIHI</td>
+                    <td>@depo.GUNCELLEYEN_KULLANICI</td>
+                    <td>@depo.GUNCELLEME_TARIHI</td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Actions
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item text-danger delete-depo" href="#" data-id="@depo.DEPO_ID">Depoyu Sil</a><br />
+                                @Html.ActionLink("Depoyu Güncelle", "DepoGüncelle", "Admin", new { id = depo.DEPO_ID }, null)
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "Kayıtlı depo bulunmamaktadır";
+            }
+
+        }
+    </tbody>
+</table>
+
+@using (Html.BeginForm("Depo_AltDepo_Ekle", "Admin", FormMethod.Post))
+{
+    <div class="button-container">
+        <button type="submit" class="btn btn-success">Eşleşme Ekle</button>
+    </div>
+}
+
+@section scripts {
+    <script>
+        // Bildirim mesajı
+        $(document).ready(function () {
+            $('#notification').fadeIn('fast').delay(3000).fadeOut('fast');
+        });
+
+        // Arama kutusuna yazıldığında tabloyu filtrele
+        $(document).on('keyup', '#searchString', function () {
+            var searchText = $(this).val().toLowerCase();
+            $('tbody tr').each(function () {
+                var ad = $(this).find('td:nth-child(1)').text().toLowerCase(); // Adjusted to nth-child(1) for Username
+                var statu = $(this).find('td:nth-child(2)').text().toLowerCase();
+                var olKul = $(this).find('td:nth-child(3)').text().toLowerCase();
+                var olTar = $(this).find('td:nth-child(4)').text().toLowerCase();
+                var gunKul = $(this).find('td:nth-child(5)').text().toLowerCase();
+                var gunTar = $(this).find('td:nth-child(6)').text().toLowerCase();
+                if (ad.includes(searchText) || statu.includes(searchText) || olKul.includes(searchText) || olTar.includes(searchText) || gunKul.includes(searchText) || gunTar.includes(searchText)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.delete-depo').click(function (e) {
+                e.preventDefault();
+
+                var depoID = $(this).data('id');
+                var url = '@Url.Action("DepoSil", "Admin")' + '?depo=' + depoID;
+
+                // Confirm dialog
+                if (confirm('Bu depoyu silmek istediğinizden emin misiniz?')) {
+
+                    $.post(url, function (data) {
+                        // Handle success or refresh the page
+                        location.reload(); // Refresh the page after deletion
+                    });
+                }
+            });
+
+        });
+
+
+    </script>
+}

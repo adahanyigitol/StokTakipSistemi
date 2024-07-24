@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d0bd702bf8b6433cbcfe29c09f7131cb" Name="Diagram1" ZoomLevel="52">
+        <EntityTypeShape EntityType="StokTakipDBModel.ALT_DEPO" Width="1.5" PointX="10.875" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StokTakipDBModel.DEPO" Width="1.5" PointX="10.875" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StokTakipDBModel.DEPO_ESLESTIRME" Width="1.5" PointX="5.25" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StokTakipDBModel.HAREKET_TIP" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StokTakipDBModel.KULLANICI" Width="1.5" PointX="7.625" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StokTakipDBModel.KULLANICI_TIP" Width="1.5" PointX="10.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StokTakipDBModel.OLCU_BIRIMI" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StokTakipDBModel.SORUMLU" Width="1.5" PointX="0.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StokTakipDBModel.STOK" Width="1.5" PointX="7.625" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StokTakipDBModel.STOK_DURUM" Width="1.5" PointX="4.875" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StokTakipDBModel.STOK_HAREKET" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <AssociationConnector Association="StokTakipDBModel.FK_ALT_DEPO_ALT_DEPO_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="StokTakipDBModel.FK_DEPO_DEPO_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="StokTakipDBModel.FK_DEPO_ESLESTIRME_DEPO_ESLESTIRME_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="StokTakipDBModel.FK_DEPO_ESLESTIRME_STOK_HAREKET" ManuallyRouted="false" />
+        <AssociationConnector Association="StokTakipDBModel.FK_HAREKET_TIP_STOK_HAREKET" ManuallyRouted="false" />
+        <AssociationConnector Association="StokTakipDBModel.FK_KULLANICI_TIP_KULLANICI_TIP_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="StokTakipDBModel.FK_OLCU_BIRIMI_OLCU_BIRIMI_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="StokTakipDBModel.FK_SORUMLU_STOK_HAREKET" ManuallyRouted="false" />
+        <AssociationConnector Association="StokTakipDBModel.FK_STOK_STOK_HAREKET" ManuallyRouted="false" />
+        <AssociationConnector Association="StokTakipDBModel.FK_STOK_STOK_ID" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

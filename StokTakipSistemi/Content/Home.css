@@ -1,0 +1,40 @@
+﻿/* admin-login.css */
+
+body {
+    background-size: contain;
+    background-repeat: no-repeat no-repeat;
+    background-position: center center;
+    height: 200px;
+    width: 200px;
+    background-color: #ced6e0;
+    background-blend-mode: multiply;
+}
+
+.form-control {
+    /* Example style for form inputs */
+    background-color: #333; /* Dark background for inputs */
+    color: white; /* Text color for inputs */
+}
+
+.btn-primary {
+    /* Example style for login button */
+    background-color: #007bff; /* Blue color for button */
+    border-color: #007bff; /* Border color */
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+        border-color: #0056b3;
+    }
+
+.text-danger {
+    color: #dc3545; /* Red color for validation messages */
+}
+
+.alert {
+    /* Example style for error message */
+    background-color: #dc3545; /* Red background */
+    color: white; /* Text color */
+    padding: 10px;
+    margin-top: 10px;
+}

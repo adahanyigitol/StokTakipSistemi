@@ -1,0 +1,155 @@
+﻿
+
+@using StokTakipSistemi.Models
+@model IEnumerable<STOK>
+@{
+    ViewBag.Title = "Stok Listesi";
+}
+
+<h2>Stok Listesi</h2>
+
+<div id="notification" class="alert alert-success" style="display: none;">
+    @if (TempData["SuccessMessage"] != null)
+    {
+        @TempData["SuccessMessage"]
+    }
+    else
+    {
+        @TempData["FailMessage"]
+    }
+</div>
+
+@using (Html.BeginForm("StokSayfasi", "Admin", FormMethod.Get))
+{
+    <div class="button-container">
+        @Html.TextBox("searchString", null, new { @class = "form-control search-input", placeholder = "Tabloda arayın" })
+    </div>
+}
+
+<style>
+
+    .search-input {
+        width: 250px; /* Adjust the width of the input field as needed */
+        margin-right: 5px; /* Optional: Add some space between input field and button */
+    }
+</style>
+
+<br />
+
+@using (Html.BeginForm("StokEkle", "Admin", FormMethod.Post))
+{
+    <div class="button-container" style="float: left;">
+        <button type="submit" class="btn btn-success">Stok Ekle</button>
+    </div>
+}
+
+@using (Html.BeginForm("ExportToExcelStok", "Admin", FormMethod.Post))
+{
+    <div class="button-container" style="float: right;">
+        <button type="submit" class="btn btn-success">Excel'e Aktar</button>
+    </div>
+}
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Stok Adı</th>
+            <th>Stok Ölçü Birimi</th>
+            <th>Stok Marka</th>
+            <th>Stok Detay</th>
+            <th>Kayıt Tarihi</th>
+            <th>Minimum Miktar</th>
+            <th>Statü</th>
+            <th>Oluşturan Kullanıcı</th>
+            <th>Oluşturma Tarihi</th>
+            <th>Güncelleyen Kullanıcı</th>
+            <th>Güncelleme Tarihi</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in (IEnumerable<STOK>)TempData["stoklar"])
+        {
+            <tr>
+                <td>@user.STOK_AD</td>
+                <td>@user.STOK_OLCUBIRIM</td>
+                <td>@user.STOK_MARKA</td>
+                <td>@user.STOK_DETAY</td>
+                <td>@user.KAYIT_TARIHI</td>
+                <td>@user.MIN_MIKTAR</td>
+                <td>@user.STATU</td>
+                <td>@user.OLUSTURAN_KULLANICI</td>
+                <td>@user.OLUSTURMA_TARIHI</td>
+                <td>@user.GUNCELLEYEN_KULLANICI</td>
+                <td>@user.GUNCELLEME_TARIHI</td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Actions
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item text-danger delete-stok" href="#" data-id="@user.STOK_ID">Stoğu Sil</a><br />
+                            @Html.ActionLink("Stok Güncelle", "StokGuncelle", "Admin", new { id = user.STOK_ID }, null)
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts {
+    <script>
+        // Bildirim mesajı
+        $(document).ready(function () {
+            $('#notification').fadeIn('fast').delay(3000).fadeOut('fast');
+        });
+
+        // Arama kutusuna yazıldığında tabloyu filtrele
+        $(document).on('keyup', '#searchString', function () {
+            var searchText = $(this).val().toLowerCase();
+            $('tbody tr').each(function () {
+                var ad = $(this).find('td:nth-child(1)').text().toLowerCase(); // Adjusted to nth-child(1) for Username
+                var olcubirim = $(this).find('td:nth-child(2)').text().toLowerCase();
+                var marka= $(this).find('td:nth-child(3)').text().toLowerCase();
+                var detay = $(this).find('td:nth-child(4)').text().toLowerCase();
+                var kayit = $(this).find('td:nth-child(5)').text().toLowerCase();
+                var miktar = $(this).find('td:nth-child(6)').text().toLowerCase();
+                var statu = $(this).find('td:nth-child(7)').text().toLowerCase();
+                var olKul = $(this).find('td:nth-child(8)').text().toLowerCase();
+                var olTar = $(this).find('td:nth-child(9)').text().toLowerCase();
+                var gunKul = $(this).find('td:nth-child(10)').text().toLowerCase();
+                var gunTar = $(this).find('td:nth-child(11)').text().toLowerCase();
+                if (ad.includes(searchText) || olcubirim.includes(searchText) || marka.includes(searchText) || detay.includes(searchText)
+                    || miktar.includes(searchText) || statu.includes(searchText) || olKul.includes(searchText) || olTar.includes(searchText) || gunKul.includes(searchText) || gunTar.includes(searchText)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.delete-stok').click(function (e) {
+                e.preventDefault();
+
+                var stokID = $(this).data('id');
+                var url = '@Url.Action("StokSil", "Admin")' + '?stokID=' + stokID;
+
+                // Confirm dialog
+                if (confirm('Bu stoğu silmek istediğinizden emin misiniz?')) {
+                    // AJAX request to delete user
+                    $.post(url, function (data) {
+                        // Handle success or refresh the page
+                        location.reload(); // Refresh the page after deletion
+                    });
+                }
+            });
+
+        });
+
+
+    </script>
+}
